@@ -34,6 +34,15 @@ module.exports = {
         })
       }
     }
+  },
+
+  modules: [
+    '@nuxtjs/vuetify'
+  ],
+
+  // Vuetify options
+  vuetify: {
+    //  theme: { }
   }
 }
 
