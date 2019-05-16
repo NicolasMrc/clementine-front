@@ -30,8 +30,8 @@ export default {
    * @returns {Promise<void>}
    */
   async delete({commit}, id){
-    const data = await this.$axios.$delete(API_ENDPOINT + 'id')
-    commit('delete', data)
+    await this.$axios.$delete(API_ENDPOINT + id)
+    commit('delete', id)
   },
 
   /**
