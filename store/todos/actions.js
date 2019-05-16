@@ -41,7 +41,7 @@ export default {
    * @returns {Promise<void>}
    */
   async update({commit}, todo){
-    const data = await this.$axios.$patch(API_ENDPOINT + todo.id, todo)
+    const data = await this.$axios.$put(API_ENDPOINT + todo.id, todo)
     commit('update', data)
   },
 
