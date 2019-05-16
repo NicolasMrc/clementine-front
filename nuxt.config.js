@@ -37,12 +37,11 @@ module.exports = {
   },
 
   modules: [
+    '@nuxtjs/axios',
     '@nuxtjs/vuetify'
   ],
 
-  // Vuetify options
-  vuetify: {
-    //  theme: { }
-  }
+  vuetify: {},
+  axios: {}
 }
 
