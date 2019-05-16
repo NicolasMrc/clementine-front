@@ -35,8 +35,8 @@ export default {
    * @param state
    * @param todo
    */
-  delete(state, todo){
-    const index = state.list.map(t => t.id).indexOf(todo.id)
+  delete(state, id){
+    const index = state.list.map(t => t.id).indexOf(id)
     if(index !== -1){
       state.list.splice(index, 1)
     }
