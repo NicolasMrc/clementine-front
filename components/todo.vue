@@ -39,11 +39,15 @@
     methods:{
       async update(){
         this.loading = true
-        await this.$store.dispatch('todos/update', {
-          id : this.todo.id,
-          title : this.todo.title,
-          completed : !this.todo.completed
-        })
+        try {
+          await this.$store.dispatch('todos/update', {
+            id: this.todo.id,
+            title: this.todo.title,
+            completed: !this.todo.completed
+          })
+        } catch (e) {
+          this.$emit('error', 'Error. jsonplaceholder API does not allow you to edit todos you created yourself.', 'error')
+        }
         this.loading = false
       },
       async remove(){
