@@ -8,15 +8,27 @@
         <v-flex xs12 md8 offset-md2>
           <v-card>
             <v-card-title>
-              Clementine Todo List
+                <v-layout row wrap>
+                  <v-flex xs12 text-xs-center>
+                    <h3 class="subheading">
+                      Clementine Todo List
+                    </h3>
+                  </v-flex>
+                  <v-flex xs6 pl-3>
+                    <v-checkbox class="text-xs-right"
+                                label="Hide completed task ?"
+                                v-model="hideCompletedTodos"
+                    ></v-checkbox>
+                  </v-flex>
+                </v-layout>
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
               <v-list>
                 <transition-group name="list" tag="div">
-                  <div v-for="todo in todos" :key="todo.id">
+                  <div v-for="(todo, index) in hideCompletedTodos ? remaining : todos" :key="todo.id">
                     <todo :todo="todo" ></todo>
-                    <v-divider></v-divider>
+                    <v-divider v-if="index !== (hideCompletedTodos ? remaining.length - 1 : todos.length - 1 ) "></v-divider>
                   </div>
                 </transition-group>
               </v-list>
@@ -43,9 +55,20 @@
     async fetch ({ store }) {
       await store.dispatch('todos/getAll');
     },
-    computed: mapGetters({
-      todos: 'todos/todos'
-    }),
+    computed: {
+      ...mapGetters({
+        todos: 'todos/todos'
+      }),
+      remaining(){
+        return this.todos.filter(t => !t.completed)
+      }
+    },
+
+    data(){
+      return{
+        hideCompletedTodos : false
+      }
+    }
   }
 </script>
 
