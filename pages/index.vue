@@ -22,8 +22,8 @@
             <v-card-text>
               <v-list>
                 <transition-group name="list" tag="div">
-                  <div v-for="(todo, index) in hideCompletedTodos ? remaining : todos" :key="todo.id">
-                    <todo :todo="todo" ></todo>
+                  <div v-for="(todo, index) in hideCompletedTodos ? remaining : todos" :key="'todo_' + todo.id + '_' + todo.title">
+                    <todo :todo="todo" v-on:error="showMessage"></todo>
                     <v-divider v-if="index !== (hideCompletedTodos ? remaining.length - 1 : todos.length - 1 ) "></v-divider>
                   </div>
                 </transition-group>
@@ -35,11 +35,16 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <v-snackbar v-model="snackbar" :color="snackColor" timeoout="6000">
+      {{ snackText }}
+      <v-btn color="white" flat @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
-  import AppLogo from '~/components/AppLogo.vue'
   import { mapGetters } from 'vuex'
   import Todo from "../components/todo";
   import NewTask from "../components/NewTask";
@@ -48,7 +53,6 @@
     components: {
       NewTask,
       Todo,
-      AppLogo
     },
     async fetch ({ store }) {
       await store.dispatch('todos/getAll');
@@ -61,10 +65,19 @@
         return this.todos.filter(t => !t.completed)
       }
     },
-
     data(){
       return{
-        hideCompletedTodos : false
+        hideCompletedTodos : false,
+        snackbar : false,
+        snackText: '',
+        snackColor: '',
+      }
+    },
+    methods:{
+      showMessage(text, color){
+        this.snackText = text
+        this.snackColor = color
+        this.snackbar = true
       }
     }
   }
