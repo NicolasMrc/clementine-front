@@ -13,17 +13,6 @@ export default {
   },
 
   /**
-   * call the api to get one todo by id
-   * @param commit
-   * @param id
-   * @returns {Promise<void>}
-   */
-  async getOneById({commit}, id){
-    const data = await this.$axios.$get(API_ENDPOINT + 'id')
-    commit('select', data)
-  },
-
-  /**
    * call the api to delete one todo by id
    * @param commit
    * @param id

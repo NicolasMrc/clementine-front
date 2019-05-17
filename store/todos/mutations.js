@@ -1,33 +1,12 @@
 export default {
 
   /**
-   * add a todo to the list if it's not already in it
-   * @param state
-   * @param todo
-   */
-  add(state, todo) {
-    const index = state.todos.map(t => t.id).indexOf(todo.id)
-    if(index === -1) {
-      state.list.push(todo)
-    }
-  },
-
-  /**
    * set the list of todos
    * @param state
    * @param todos
    */
   set(state, todos){
     state.list = todos
-  },
-
-  /**
-   * select a todo
-   * @param state
-   * @param todo
-   */
-  select(state, todo){
-    state.selected = todo
   },
 
   /**
@@ -55,6 +34,11 @@ export default {
     }
   },
 
+  /**
+   * add the new todo at the begining of the list
+   * @param state
+   * @param todo
+   */
   save(state, todo){
     state.list.unshift(todo)
   }

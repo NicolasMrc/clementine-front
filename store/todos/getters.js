@@ -10,11 +10,11 @@ export default {
   },
 
   /**
-   * getter for the selected todo
+   * getter for all todos not completed
    * @param state
-   * @returns {default.selected|(function(*))|null|boolean}
+   * @returns {T[]}
    */
-  selected(state) {
-    return state.selected
-  }
+  remaining(state) {
+    return state.list.filter(t => !t.completed)
+  },
 }
