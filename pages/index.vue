@@ -2,26 +2,22 @@
   <v-app>
     <v-container grid-list-md>
       <v-layout row wrap  mt-3>
-        <v-flex xs12 text-xs-center>
-          <app-logo/>
+        <v-flex xs12 md8 offset-md2 text-xs-center mb-4>
+            <h3 class="display-3 grey--text text--darken-3">
+              Clementine Todo List
+            </h3>
+        </v-flex>
+        <v-flex xs12 md8 offset-md2 text-xs-center>
+          <new-task></new-task>
+        </v-flex>
+        <v-flex xs12 md8 offset-md2 text-xs-center mb-2>
+          <v-checkbox class="text-xs-right"
+                      label="Hide completed task ?"
+                      v-model="hideCompletedTodos"
+          ></v-checkbox>
         </v-flex>
         <v-flex xs12 md8 offset-md2>
           <v-card>
-            <v-card-title>
-                <v-layout row wrap>
-                  <v-flex xs12 text-xs-center>
-                    <h3 class="subheading">
-                      Clementine Todo List
-                    </h3>
-                  </v-flex>
-                  <v-flex xs6 pl-3>
-                    <v-checkbox class="text-xs-right"
-                                label="Hide completed task ?"
-                                v-model="hideCompletedTodos"
-                    ></v-checkbox>
-                  </v-flex>
-                </v-layout>
-            </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
               <v-list>
@@ -46,9 +42,11 @@
   import AppLogo from '~/components/AppLogo.vue'
   import { mapGetters } from 'vuex'
   import Todo from "../components/todo";
+  import NewTask from "../components/NewTask";
 
   export default {
     components: {
+      NewTask,
       Todo,
       AppLogo
     },
