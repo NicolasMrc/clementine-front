@@ -54,4 +54,8 @@ export default {
       state.list[index].completed = todo.completed
     }
   },
+
+  save(state, todo){
+    state.list.unshift(todo)
+  }
 }
